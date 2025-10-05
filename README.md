@@ -14,7 +14,8 @@
 ### daily-use/ - 日常的に使用
 日々の作業で使うスクリプト
 
-- **run_comfyui_advanced.bat** - ComfyUI起動（VRAM設定選択可能）
+- **run_comfyui.bat** - ComfyUI起動（シンプル版、ブラウザ自動起動）
+- **run_comfyui_advanced.bat** - ComfyUI起動（VRAM設定選択可能、ブラウザ自動起動）
 - **update_comfyui.bat** - ComfyUI本体とSVDノードの更新
 - **cleanup_comfyui.bat** - キャッシュ削除/アンインストール
 
@@ -29,7 +30,8 @@
 
 ### 日常使用
 ```
-- 起動: daily-use\run_comfyui_advanced.bat
+- 起動: daily-use\run_comfyui.bat（シンプル版）
+       daily-use\run_comfyui_advanced.bat（詳細設定版）
 - 更新: daily-use\update_comfyui.bat
 - 削除: daily-use\cleanup_comfyui.bat
 ```
@@ -43,7 +45,7 @@
 ## 📦 インストールされるもの
 - ComfyUI本体
 - Stable Video Diffusion カスタムノード
-- PyTorch（CUDA 12.1対応）
+- PyTorch（CUDA 12.4対応）
 - SVDモデル（オプション選択可能）
 
 ## 🎬 SVDモデルの選択肢
