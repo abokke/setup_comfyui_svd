@@ -1,0 +1,29 @@
+# ComfyUI installation directory
+ComfyUI/
+
+# Test files
+test.ps1
+test_scripts.bat
+quick_test.ps1
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
