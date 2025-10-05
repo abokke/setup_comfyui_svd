@@ -19,15 +19,21 @@ set MODELS_DIR=%INSTALL_DIR%\models\checkpoints
 set CUSTOM_NODES_DIR=%INSTALL_DIR%\custom_nodes
 
 echo [1/8] Python 3.11 の確認...
-python --version >nul 2>&1
+py --version >nul 2>&1
 if %errorLevel% neq 0 (
-    echo [エラー] Pythonがインストールされていません
-    echo https://www.python.org/downloads からダウンロードしてください
-    pause
-    exit /b 1
+    python --version >nul 2>&1
+    if %errorLevel% neq 0 (
+        echo [エラー] Pythonがインストールされていません
+        echo https://www.python.org/downloads からダウンロードしてください
+        pause
+        exit /b 1
+    )
+    set PYTHON_CMD=python
+) else (
+    set PYTHON_CMD=py
 )
 
-python --version
+%PYTHON_CMD% --version
 echo Python OK!
 echo.
 
@@ -59,7 +65,7 @@ echo.
 echo [4/8] 仮想環境の作成...
 cd /d "%INSTALL_DIR%"
 if not exist venv (
-    python -m venv venv
+    %PYTHON_CMD% -m venv venv
     if %errorLevel% neq 0 (
         echo [エラー] 仮想環境の作成に失敗しました
         pause

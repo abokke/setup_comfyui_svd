@@ -1,5 +1,9 @@
 @echo off
 chcp 65001 >nul
+
+REM スクリプトのディレクトリに移動
+cd /d "%~dp0"
+
 cls
 echo ================================================
 echo ComfyUI + SVD ワンクリックインストーラー
@@ -26,7 +30,7 @@ if %errorLevel% neq 0 (
 )
 
 REM ステップ2: モデルダウンロード
-call download_svd_model.bat
+call download_svd_model.bat AUTO
 if %errorLevel% neq 0 (
     echo [エラー] モデルのダウンロードに失敗しました
     pause
