@@ -79,13 +79,19 @@ echo.
 
 echo [5/8] 依存関係のインストール...
 call venv\Scripts\activate.bat
-python -m pip install --upgrade pip
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-pip install -r requirements.txt
 if %errorLevel% neq 0 (
-    echo [エラー] 依存関係のインストールに失敗しました
+    echo [エラー] 仮想環境のアクティベートに失敗しました
     pause
     exit /b 1
+)
+echo pipをアップグレード中...
+python -m pip install --upgrade pip
+echo PyTorchをインストール中...
+python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+echo 依存関係をインストール中...
+python -m pip install -r requirements.txt
+if %errorLevel% neq 0 (
+    echo [警告] 一部の依存関係のインストールに失敗しましたが、続行します
 )
 echo.
 
@@ -94,7 +100,7 @@ if not exist "%CUSTOM_NODES_DIR%\ComfyUI-Stable-Video-Diffusion" (
     cd /d "%CUSTOM_NODES_DIR%"
     git clone https://github.com/thecooltechguy/ComfyUI-Stable-Video-Diffusion
     cd ComfyUI-Stable-Video-Diffusion
-    pip install -r requirements.txt
+    python -m pip install -r requirements.txt
     echo SVDノードをインストールしました
 ) else (
     echo SVDノードが既に存在します
@@ -127,11 +133,15 @@ echo.
 pause
 
 REM 起動用バッチファイルを作成
+if not exist "%~dp0..\daily-use" (
+    mkdir "%~dp0..\daily-use"
+)
 cd /d "%~dp0..\daily-use"
 (
 echo @echo off
-echo cd /d "%INSTALL_DIR%"
-echo call venv\Scripts\activate.bat
+echo cd /d "%%~dp0.."
+echo call ComfyUI\venv\Scripts\activate.bat
+echo cd ComfyUI
 echo python main.py
 echo pause
 ) > run_comfyui.bat

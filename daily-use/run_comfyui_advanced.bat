@@ -14,8 +14,13 @@ echo.
 set /p LAUNCH_MODE="選択 (1-5): "
 
 set INSTALL_DIR=%~dp0..\ComfyUI
+if not exist "%INSTALL_DIR%" (
+    echo [エラー] ComfyUIがインストールされていません
+    pause
+    exit /b 1
+)
+set PYTHON_EXE=%INSTALL_DIR%\venv\Scripts\python.exe
 cd /d "%INSTALL_DIR%"
-call venv\Scripts\activate.bat
 
 if %LAUNCH_MODE%==1 goto NORMAL
 if %LAUNCH_MODE%==2 goto LOWVRAM
@@ -28,29 +33,34 @@ exit /b 1
 
 :NORMAL
 echo 通常モードで起動中...
-python main.py
+start http://127.0.0.1:8188
+"%PYTHON_EXE%" main.py
 goto END
 
 :LOWVRAM
 echo 低VRAMモードで起動中...
-python main.py --lowvram
+start http://127.0.0.1:8188
+"%PYTHON_EXE%" main.py --lowvram
 goto END
 
 :NOVRAM
 echo 超低VRAMモードで起動中...
-python main.py --novram
+start http://127.0.0.1:8188
+"%PYTHON_EXE%" main.py --novram
 goto END
 
 :CPU
 echo CPUモードで起動中（非常に遅いです）...
-python main.py --cpu
+start http://127.0.0.1:8188
+"%PYTHON_EXE%" main.py --cpu
 goto END
 
 :PORT
 echo.
 set /p CUSTOM_PORT="ポート番号を入力 (例: 8080): "
 echo ポート %CUSTOM_PORT% で起動中...
-python main.py --port %CUSTOM_PORT%
+start http://127.0.0.1:%CUSTOM_PORT%
+"%PYTHON_EXE%" main.py --port %CUSTOM_PORT%
 goto END
 
 :END

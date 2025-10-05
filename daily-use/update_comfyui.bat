@@ -24,8 +24,8 @@ echo.
 
 echo [2/3] 依存関係を更新中...
 call venv\Scripts\activate.bat
-pip install --upgrade pip
-pip install -r requirements.txt --upgrade
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt --upgrade
 echo.
 
 echo [3/3] SVDカスタムノードを更新中...
@@ -34,7 +34,7 @@ git pull
 if %errorLevel% neq 0 (
     echo [警告] SVDノードの更新に失敗しました
 ) else (
-    pip install -r requirements.txt --upgrade
+    python -m pip install -r requirements.txt --upgrade
 )
 echo.
 

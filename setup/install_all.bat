@@ -30,7 +30,7 @@ if %errorLevel% neq 0 (
 )
 
 REM ステップ2: モデルダウンロード
-call download_svd_model.bat AUTO
+call "%~dp0download_svd_model.bat" AUTO
 if %errorLevel% neq 0 (
     echo [エラー] モデルのダウンロードに失敗しました
     pause
@@ -45,5 +45,5 @@ echo.
 echo 今すぐComfyUIを起動しますか？
 set /p LAUNCH="起動する (Y/N): "
 if /i "%LAUNCH%"=="Y" (
-    call run_comfyui.bat
+    call "%~dp0..\daily-use\run_comfyui.bat"
 )

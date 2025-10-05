@@ -13,6 +13,12 @@ set /p CLEANUP_MODE="選択 (1-3): "
 
 set INSTALL_DIR=%~dp0..\ComfyUI
 
+if not exist "%INSTALL_DIR%" (
+    echo [エラー] ComfyUIがインストールされていません
+    pause
+    exit /b 1
+)
+
 if "%CLEANUP_MODE%"=="1" goto CACHE
 if "%CLEANUP_MODE%"=="2" goto OUTPUT
 if "%CLEANUP_MODE%"=="3" goto FULL
