@@ -1,21 +1,20 @@
 @echo off
-chcp 65001 >nul
 echo ================================================
-echo ComfyUI èµ·å‹•ã‚ªãƒ—ã‚·ãƒ§ãƒ³
+echo ComfyUI ‹N“®ƒIƒvƒVƒ‡ƒ“
 echo ================================================
 echo.
-echo èµ·å‹•ãƒ¢ãƒ¼ãƒ‰ã‚’é¸æŠžã—ã¦ãã ã•ã„:
-echo 1. é€šå¸¸èµ·å‹• (12GBä»¥ä¸Šã®VRAMæŽ¨å¥¨)
-echo 2. ä½ŽVRAMãƒ¢ãƒ¼ãƒ‰ (8-12GB VRAM)
-echo 3. è¶…ä½ŽVRAMãƒ¢ãƒ¼ãƒ‰ (6-8GB VRAM)
-echo 4. CPUãƒ¢ãƒ¼ãƒ‰ (GPUãªã—ã€éžå¸¸ã«é…ã„)
-echo 5. ãƒãƒ¼ãƒˆå¤‰æ›´ãƒ¢ãƒ¼ãƒ‰ (ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ: 8188)
+echo ‹N“®ƒ‚[ƒh‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢:
+echo 1. ’Êí‹N“® (12GBˆÈã‚ÌVRAM„§)
+echo 2. ’áVRAMƒ‚[ƒh (8-12GB VRAM)
+echo 3. ’´’áVRAMƒ‚[ƒh (6-8GB VRAM)
+echo 4. CPUƒ‚[ƒh (GPU‚È‚µA”ñí‚É’x‚¢)
+echo 5. ƒ|[ƒg•ÏXƒ‚[ƒh (ƒfƒtƒHƒ‹ƒg: 8188)
 echo.
-set /p LAUNCH_MODE="é¸æŠž (1-5): "
+set /p LAUNCH_MODE="‘I‘ð (1-5): "
 
 set INSTALL_DIR=%~dp0..\ComfyUI
 if not exist "%INSTALL_DIR%" (
-    echo [ã‚¨ãƒ©ãƒ¼] ComfyUIãŒã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã›ã‚“
+    echo [ƒGƒ‰[] ComfyUI‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ
     pause
     exit /b 1
 )
@@ -27,38 +26,38 @@ if %LAUNCH_MODE%==2 goto LOWVRAM
 if %LAUNCH_MODE%==3 goto NOVRAM
 if %LAUNCH_MODE%==4 goto CPU
 if %LAUNCH_MODE%==5 goto PORT
-echo ç„¡åŠ¹ãªé¸æŠžã§ã™
+echo –³Œø‚È‘I‘ð‚Å‚·
 pause
 exit /b 1
 
 :NORMAL
-echo é€šå¸¸ãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•ä¸­...
+echo ’Êíƒ‚[ƒh‚Å‹N“®’†...
 start http://127.0.0.1:8188
 "%PYTHON_EXE%" main.py
 goto END
 
 :LOWVRAM
-echo ä½ŽVRAMãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•ä¸­...
+echo ’áVRAMƒ‚[ƒh‚Å‹N“®’†...
 start http://127.0.0.1:8188
 "%PYTHON_EXE%" main.py --lowvram
 goto END
 
 :NOVRAM
-echo è¶…ä½ŽVRAMãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•ä¸­...
+echo ’´’áVRAMƒ‚[ƒh‚Å‹N“®’†...
 start http://127.0.0.1:8188
 "%PYTHON_EXE%" main.py --novram
 goto END
 
 :CPU
-echo CPUãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•ä¸­ï¼ˆéžå¸¸ã«é…ã„ã§ã™ï¼‰...
+echo CPUƒ‚[ƒh‚Å‹N“®’†(”ñí‚É’x‚¢‚Å‚·)...
 start http://127.0.0.1:8188
 "%PYTHON_EXE%" main.py --cpu
 goto END
 
 :PORT
 echo.
-set /p CUSTOM_PORT="ãƒãƒ¼ãƒˆç•ªå·ã‚’å…¥åŠ› (ä¾‹: 8080): "
-echo ãƒãƒ¼ãƒˆ %CUSTOM_PORT% ã§èµ·å‹•ä¸­...
+set /p CUSTOM_PORT="ƒ|[ƒg”Ô†‚ð“ü—Í (—á: 8080): "
+echo ƒ|[ƒg %CUSTOM_PORT% ‚Å‹N“®’†...
 start http://127.0.0.1:%CUSTOM_PORT%
 "%PYTHON_EXE%" main.py --port %CUSTOM_PORT%
 goto END

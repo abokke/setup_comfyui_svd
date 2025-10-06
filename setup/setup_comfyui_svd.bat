@@ -1,30 +1,29 @@
 @echo off
-chcp 65001 >nul
 echo ================================================
-echo ComfyUI + Stable Video Diffusion è‡ªå‹•ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
+echo ComfyUI + Stable Video Diffusion ©“®ƒZƒbƒgƒAƒbƒv
 echo ================================================
 echo.
 
-REM ç®¡ç†è€…æ¨©é™ãƒã‚§ãƒƒã‚¯
+REM ŠÇ—ÒŒ ŒÀƒ`ƒFƒbƒN
 net session >nul 2>&1
 if %errorLevel% neq 0 (
-    echo [è­¦å‘Š] ç®¡ç†è€…æ¨©é™ã§å®Ÿè¡Œã™ã‚‹ã“ã¨ã‚’æ¨å¥¨ã—ã¾ã™
-    echo å³ã‚¯ãƒªãƒƒã‚¯ â†’ ç®¡ç†è€…ã¨ã—ã¦å®Ÿè¡Œ
+    echo [Œx] ŠÇ—ÒŒ ŒÀ‚ÅÀs‚·‚é‚±‚Æ‚ğ„§‚µ‚Ü‚·
+    echo ‰EƒNƒŠƒbƒN ¨ ŠÇ—Ò‚Æ‚µ‚ÄÀs
     pause
 )
 
-REM ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«å…ˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+REM ƒCƒ“ƒXƒg[ƒ‹—pƒfƒBƒŒƒNƒgƒŠ
 set INSTALL_DIR=%~dp0..\ComfyUI
 set MODELS_DIR=%INSTALL_DIR%\models\checkpoints
 set CUSTOM_NODES_DIR=%INSTALL_DIR%\custom_nodes
 
-echo [1/8] Python 3.11 ã®ç¢ºèª...
+echo [1/8] Python 3.11 ‚ÌŠm”F...
 py --version >nul 2>&1
 if %errorLevel% neq 0 (
     python --version >nul 2>&1
     if %errorLevel% neq 0 (
-        echo [ã‚¨ãƒ©ãƒ¼] PythonãŒã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã›ã‚“
-        echo https://www.python.org/downloads ã‹ã‚‰ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã¦ãã ã•ã„
+        echo [ƒGƒ‰[] Python‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ
+        echo https://www.python.org/downloads ‚©‚çƒ_ƒEƒ“ƒ[ƒh‚µ‚Ä‚­‚¾‚³‚¢
         pause
         exit /b 1
     )
@@ -37,11 +36,11 @@ if %errorLevel% neq 0 (
 echo Python OK!
 echo.
 
-echo [2/8] Gitã®ç¢ºèª...
+echo [2/8] Git‚ÌŠm”F...
 git --version >nul 2>&1
 if %errorLevel% neq 0 (
-    echo [ã‚¨ãƒ©ãƒ¼] GitãŒã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã›ã‚“
-    echo https://git-scm.com/download/win ã‹ã‚‰ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã¦ãã ã•ã„
+    echo [ƒGƒ‰[] Git‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ
+    echo https://git-scm.com/download/win ‚©‚çƒ_ƒEƒ“ƒ[ƒh‚µ‚Ä‚­‚¾‚³‚¢
     pause
     exit /b 1
 )
@@ -49,90 +48,90 @@ git --version
 echo Git OK!
 echo.
 
-echo [3/8] ComfyUIã®ã‚¯ãƒ­ãƒ¼ãƒ³...
+echo [3/8] ComfyUI‚ÌƒNƒ[ƒ“...
 if exist "%INSTALL_DIR%" (
-    echo ComfyUIãƒ•ã‚©ãƒ«ãƒ€ãŒæ—¢ã«å­˜åœ¨ã—ã¾ã™ã€‚ã‚¹ã‚­ãƒƒãƒ—ã—ã¾ã™ã€‚
+    echo ComfyUIƒtƒHƒ‹ƒ_‚ªŠù‚É‘¶İ‚µ‚Ü‚·BƒXƒLƒbƒv‚µ‚Ü‚·B
 ) else (
     git clone https://github.com/comfyanonymous/ComfyUI.git "%INSTALL_DIR%"
     if %errorLevel% neq 0 (
-        echo [ã‚¨ãƒ©ãƒ¼] ComfyUIã®ã‚¯ãƒ­ãƒ¼ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ
+        echo [ƒGƒ‰[] ComfyUI‚ÌƒNƒ[ƒ“‚É¸”s‚µ‚Ü‚µ‚½
         pause
         exit /b 1
     )
 )
 echo.
 
-echo [4/8] ä»®æƒ³ç’°å¢ƒã®ä½œæˆ...
+echo [4/8] ‰¼‘zŠÂ‹«‚Ìì¬...
 cd /d "%INSTALL_DIR%"
 if not exist venv (
     %PYTHON_CMD% -m venv venv
     if %errorLevel% neq 0 (
-        echo [ã‚¨ãƒ©ãƒ¼] ä»®æƒ³ç’°å¢ƒã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ
+        echo [ƒGƒ‰[] ‰¼‘zŠÂ‹«‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½
         pause
         exit /b 1
     )
-    echo ä»®æƒ³ç’°å¢ƒã‚’ä½œæˆã—ã¾ã—ãŸ
+    echo ‰¼‘zŠÂ‹«‚ğì¬‚µ‚Ü‚µ‚½
 ) else (
-    echo ä»®æƒ³ç’°å¢ƒãŒæ—¢ã«å­˜åœ¨ã—ã¾ã™
+    echo ‰¼‘zŠÂ‹«‚ªŠù‚É‘¶İ‚µ‚Ü‚·
 )
 echo.
 
-echo [5/8] ä¾å­˜é–¢ä¿‚ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«...
+echo [5/8] ˆË‘¶ŠÖŒW‚ÌƒCƒ“ƒXƒg[ƒ‹...
 call venv\Scripts\activate.bat
 if %errorLevel% neq 0 (
-    echo [ã‚¨ãƒ©ãƒ¼] ä»®æƒ³ç’°å¢ƒã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ™ãƒ¼ãƒˆã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [ƒGƒ‰[] ‰¼‘zŠÂ‹«‚ÌƒAƒNƒeƒBƒx[ƒg‚É¸”s‚µ‚Ü‚µ‚½
     pause
     exit /b 1
 )
-echo pipã‚’ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰ä¸­...
+echo pip‚ğƒAƒbƒvƒOƒŒ[ƒh’†...
 python -m pip install --upgrade pip
-echo PyTorchã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ä¸­...
+echo PyTorch‚ğƒCƒ“ƒXƒg[ƒ‹’†...
 python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-echo ä¾å­˜é–¢ä¿‚ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ä¸­...
+echo ˆË‘¶ŠÖŒW‚ğƒCƒ“ƒXƒg[ƒ‹’†...
 python -m pip install -r requirements.txt
 if %errorLevel% neq 0 (
-    echo [è­¦å‘Š] ä¸€éƒ¨ã®ä¾å­˜é–¢ä¿‚ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã«å¤±æ•—ã—ã¾ã—ãŸãŒã€ç¶šè¡Œã—ã¾ã™
+    echo [Œx] ˆê•”‚ÌˆË‘¶ŠÖŒW‚ÌƒCƒ“ƒXƒg[ƒ‹‚É¸”s‚µ‚Ü‚µ‚½‚ªA‘±s‚µ‚Ü‚·
 )
 echo.
 
-echo [6/8] SVDç”¨ã‚«ã‚¹ã‚¿ãƒ ãƒãƒ¼ãƒ‰ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«...
+echo [6/8] SVD—pƒJƒXƒ^ƒ€ƒm[ƒh‚ÌƒCƒ“ƒXƒg[ƒ‹...
 if not exist "%CUSTOM_NODES_DIR%\ComfyUI-Stable-Video-Diffusion" (
     cd /d "%CUSTOM_NODES_DIR%"
     git clone https://github.com/thecooltechguy/ComfyUI-Stable-Video-Diffusion
     cd ComfyUI-Stable-Video-Diffusion
     python -m pip install -r requirements.txt
-    echo SVDãƒãƒ¼ãƒ‰ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã—ãŸ
+    echo SVDƒm[ƒh‚ğƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚µ‚½
 ) else (
-    echo SVDãƒãƒ¼ãƒ‰ãŒæ—¢ã«å­˜åœ¨ã—ã¾ã™
+    echo SVDƒm[ƒh‚ªŠù‚É‘¶İ‚µ‚Ü‚·
 )
 echo.
 
-echo [7/8] modelsãƒ•ã‚©ãƒ«ãƒ€ã®ä½œæˆ...
+echo [7/8] modelsƒtƒHƒ‹ƒ_‚Ìì¬...
 if not exist "%MODELS_DIR%" (
     mkdir "%MODELS_DIR%"
 )
 echo.
 
-echo [8/8] ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—å®Œäº†ç¢ºèª...
+echo [8/8] ƒZƒbƒgƒAƒbƒvŠ®—¹Šm”F...
 cd /d "%INSTALL_DIR%"
 echo.
 echo ================================================
-echo ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ãŒå®Œäº†ã—ã¾ã—ãŸï¼
+echo ƒZƒbƒgƒAƒbƒv‚ªŠ®—¹‚µ‚Ü‚µ‚½I
 echo ================================================
 echo.
-echo æ¬¡ã®ã‚¹ãƒ†ãƒƒãƒ—:
-echo 1. SVDãƒ¢ãƒ‡ãƒ«ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰
+echo Ÿ‚ÌƒXƒeƒbƒv:
+echo 1. SVDƒ‚ƒfƒ‹‚ğƒ_ƒEƒ“ƒ[ƒh
 echo    https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt
 echo.
-echo 2. ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ãŸsvd_xt.safetensorsã‚’ä»¥ä¸‹ã«é…ç½®
+echo 2. ƒ_ƒEƒ“ƒ[ƒh‚µ‚½svd_xt.safetensors‚ğˆÈ‰º‚É”z’u
 echo    %MODELS_DIR%
 echo.
-echo 3. ComfyUIã‚’èµ·å‹•
-echo    daily-use\run_comfyui_advanced.bat ã‚’ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯
+echo 3. ComfyUI‚ğ‹N“®
+echo    daily-use\run_comfyui_advanced.bat ‚ğƒ_ƒuƒ‹ƒNƒŠƒbƒN
 echo.
 pause
 
-REM èµ·å‹•ç”¨ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆ
+REM ‹N“®—pƒoƒbƒ`ƒtƒ@ƒCƒ‹‚ğì¬
 if not exist "%~dp0..\daily-use" (
     mkdir "%~dp0..\daily-use"
 )
@@ -147,7 +146,7 @@ echo pause
 ) > run_comfyui.bat
 
 echo.
-echo [ç‰¹å…¸] daily-use\run_comfyui.bat ã‚’ä½œæˆã—ã¾ã—ãŸ
-echo ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ã§ComfyUIã‚’èµ·å‹•ã§ãã¾ã™
+echo [•â‘«] daily-use\run_comfyui.bat ‚ğì¬‚µ‚Ü‚µ‚½
+echo ‚±‚Ìƒtƒ@ƒCƒ‹‚ğƒ_ƒuƒ‹ƒNƒŠƒbƒN‚ÅComfyUI‚ğ‹N“®‚Å‚«‚Ü‚·
 echo.
 pause

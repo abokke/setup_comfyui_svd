@@ -1,49 +1,48 @@
 @echo off
-chcp 65001 >nul
 
-REM ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ç§»å‹•
+REM ƒXƒNƒŠƒvƒg‚ÌƒfƒBƒŒƒNƒgƒŠ‚ÉˆÚ“®
 cd /d "%~dp0"
 
 cls
 echo ================================================
-echo ComfyUI + SVD ãƒ¯ãƒ³ã‚¯ãƒªãƒƒã‚¯ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ©ãƒ¼
+echo ComfyUI + SVD ƒƒ“ƒNƒŠƒbƒNƒCƒ“ƒXƒg[ƒ‰[
 echo ================================================
 echo.
-echo ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¯ä»¥ä¸‹ã‚’è‡ªå‹•å®Ÿè¡Œã—ã¾ã™:
-echo 1. ComfyUIã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
-echo 2. SVDã‚«ã‚¹ã‚¿ãƒ ãƒŽãƒ¼ãƒ‰ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
-echo 3. SVDãƒ¢ãƒ‡ãƒ«ã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰
-echo 4. èµ·å‹•ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ä½œæˆ
+echo ‚±‚ÌƒXƒNƒŠƒvƒg‚ÍˆÈ‰º‚ðŽ©“®ŽÀs‚µ‚Ü‚·:
+echo 1. ComfyUI‚ÌƒCƒ“ƒXƒg[ƒ‹
+echo 2. SVDƒJƒXƒ^ƒ€ƒm[ƒh‚ÌƒCƒ“ƒXƒg[ƒ‹
+echo 3. SVDƒ‚ƒfƒ‹‚Ìƒ_ƒEƒ“ƒ[ƒh
+echo 4. ‹N“®ƒXƒNƒŠƒvƒg‚Ìì¬
 echo.
-echo æ‰€è¦æ™‚é–“: ç´„20-30åˆ†ï¼ˆãƒãƒƒãƒˆé€Ÿåº¦ã«ã‚ˆã‚‹ï¼‰
-echo å¿…è¦å®¹é‡: ç´„15GB
+echo Š—vŽžŠÔ: –ñ20-30•ª(ƒlƒbƒg‘¬“x‚É‚æ‚é)
+echo •K—v—e—Ê: –ñ15GB
 echo.
-set /p START="é–‹å§‹ã—ã¾ã™ã‹ï¼Ÿ (Y/N): "
+set /p START="ŠJŽn‚µ‚Ü‚·‚©? (Y/N): "
 if /i not "%START%"=="Y" exit /b
 
-REM ã‚¹ãƒ†ãƒƒãƒ—1: åŸºæœ¬ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
+REM ƒXƒeƒbƒv1: Šî–{ƒZƒbƒgƒAƒbƒv
 call setup_comfyui_svd.bat
 if %errorLevel% neq 0 (
-    echo [ã‚¨ãƒ©ãƒ¼] ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [ƒGƒ‰[] ƒZƒbƒgƒAƒbƒv‚ÉŽ¸”s‚µ‚Ü‚µ‚½
     pause
     exit /b 1
 )
 
-REM ã‚¹ãƒ†ãƒƒãƒ—2: ãƒ¢ãƒ‡ãƒ«ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰
+REM ƒXƒeƒbƒv2: ƒ‚ƒfƒ‹ƒ_ƒEƒ“ƒ[ƒh
 call "%~dp0download_svd_model.bat" AUTO
 if %errorLevel% neq 0 (
-    echo [ã‚¨ãƒ©ãƒ¼] ãƒ¢ãƒ‡ãƒ«ã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [ƒGƒ‰[] ƒ‚ƒfƒ‹‚Ìƒ_ƒEƒ“ƒ[ƒh‚ÉŽ¸”s‚µ‚Ü‚µ‚½
     pause
     exit /b 1
 )
 
 echo.
 echo ================================================
-echo ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«å®Œäº†ï¼
+echo ƒCƒ“ƒXƒg[ƒ‹Š®—¹!
 echo ================================================
 echo.
-echo ä»Šã™ãComfyUIã‚’èµ·å‹•ã—ã¾ã™ã‹ï¼Ÿ
-set /p LAUNCH="èµ·å‹•ã™ã‚‹ (Y/N): "
+echo ¡‚·‚®ComfyUI‚ð‹N“®‚µ‚Ü‚·‚©?
+set /p LAUNCH="‹N“®‚·‚é (Y/N): "
 if /i "%LAUNCH%"=="Y" (
     call "%~dp0..\daily-use\run_comfyui.bat"
 )

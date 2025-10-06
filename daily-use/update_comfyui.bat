@@ -1,7 +1,6 @@
 @echo off
-chcp 65001 >nul
 echo ================================================
-echo ComfyUI + SVDãƒŽãƒ¼ãƒ‰ ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+echo ComfyUI + SVDƒm[ƒh ƒAƒbƒvƒf[ƒgƒXƒNƒŠƒvƒg
 echo ================================================
 echo.
 
@@ -9,37 +8,37 @@ set INSTALL_DIR=%~dp0..\ComfyUI
 set CUSTOM_NODES_DIR=%INSTALL_DIR%\custom_nodes
 
 if not exist "%INSTALL_DIR%" (
-    echo [ã‚¨ãƒ©ãƒ¼] ComfyUIãŒã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã›ã‚“
+    echo [ƒGƒ‰[] ComfyUI‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ
     pause
     exit /b 1
 )
 
-echo [1/3] ComfyUIæœ¬ä½“ã‚’æ›´æ–°ä¸­...
+echo [1/3] ComfyUI–{‘Ì‚ðXV’†...
 cd /d "%INSTALL_DIR%"
 git pull
 if %errorLevel% neq 0 (
-    echo [è­¦å‘Š] ComfyUIã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [Œx] ComfyUI‚ÌXV‚ÉŽ¸”s‚µ‚Ü‚µ‚½
 )
 echo.
 
-echo [2/3] ä¾å­˜é–¢ä¿‚ã‚’æ›´æ–°ä¸­...
+echo [2/3] ˆË‘¶ŠÖŒW‚ðXV’†...
 call venv\Scripts\activate.bat
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt --upgrade
 echo.
 
-echo [3/3] SVDã‚«ã‚¹ã‚¿ãƒ ãƒŽãƒ¼ãƒ‰ã‚’æ›´æ–°ä¸­...
+echo [3/3] SVDƒJƒXƒ^ƒ€ƒm[ƒh‚ðXV’†...
 cd /d "%CUSTOM_NODES_DIR%\ComfyUI-Stable-Video-Diffusion"
 git pull
 if %errorLevel% neq 0 (
-    echo [è­¦å‘Š] SVDãƒŽãƒ¼ãƒ‰ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [Œx] SVDƒm[ƒh‚ÌXV‚ÉŽ¸”s‚µ‚Ü‚µ‚½
 ) else (
     python -m pip install -r requirements.txt --upgrade
 )
 echo.
 
 echo ================================================
-echo ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆå®Œäº†ï¼
+echo ƒAƒbƒvƒf[ƒgŠ®—¹!
 echo ================================================
 echo.
 pause

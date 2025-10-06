@@ -1,20 +1,19 @@
 @echo off
-chcp 65001 >nul
 echo ================================================
-echo ComfyUI ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+echo ComfyUI ƒNƒŠ[ƒ“ƒAƒbƒvƒXƒNƒŠƒvƒg
 echo ================================================
 echo.
-echo ä½•ã‚’ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—ã—ã¾ã™ã‹ï¼Ÿ
-echo 1. ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«ã¨ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã®ã¿
-echo 2. ç”Ÿæˆã•ã‚ŒãŸç”»åƒ/å‹•ç”»ã®ã¿
-echo 3. å®Œå…¨ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ï¼ˆComfyUIå…¨ä½“ã‚’å‰Šé™¤ï¼‰
+echo ‰½‚ðƒNƒŠ[ƒ“ƒAƒbƒv‚µ‚Ü‚·‚©?
+echo 1. ˆêŽžƒtƒ@ƒCƒ‹‚ÆƒLƒƒƒbƒVƒ…‚Ì‚Ý
+echo 2. ¶¬‚³‚ê‚½‰æ‘œ/“®‰æ‚Ì‚Ý
+echo 3. Š®‘SƒAƒ“ƒCƒ“ƒXƒg[ƒ‹(ComfyUI‘S‘Ì‚ðíœ)
 echo.
-set /p CLEANUP_MODE="é¸æŠž (1-3): "
+set /p CLEANUP_MODE="‘I‘ð (1-3): "
 
 set INSTALL_DIR=%~dp0..\ComfyUI
 
 if not exist "%INSTALL_DIR%" (
-    echo [ã‚¨ãƒ©ãƒ¼] ComfyUIãŒã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã›ã‚“
+    echo [ƒGƒ‰[] ComfyUI‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ
     pause
     exit /b 1
 )
@@ -22,45 +21,45 @@ if not exist "%INSTALL_DIR%" (
 if "%CLEANUP_MODE%"=="1" goto CACHE
 if "%CLEANUP_MODE%"=="2" goto OUTPUT
 if "%CLEANUP_MODE%"=="3" goto FULL
-echo ç„¡åŠ¹ãªé¸æŠžã§ã™
+echo –³Œø‚È‘I‘ð‚Å‚·
 pause
 exit /b 1
 
 :CACHE
-echo ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ä¸­...
+echo ˆêŽžƒtƒ@ƒCƒ‹‚ðíœ’†...
 cd /d "%INSTALL_DIR%"
 if exist "temp" rd /s /q temp
 if exist "__pycache__" rd /s /q __pycache__
 if exist "venv\Lib\site-packages\*.pyc" del /s /q "venv\Lib\site-packages\*.pyc"
-echo ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤ã—ã¾ã—ãŸ
+echo ƒLƒƒƒbƒVƒ…‚ðíœ‚µ‚Ü‚µ‚½
 goto END
 
 :OUTPUT
-echo ç”Ÿæˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ä¸­...
+echo ¶¬ƒtƒ@ƒCƒ‹‚ðíœ’†...
 cd /d "%INSTALL_DIR%"
 if exist "output" (
-    set /p CONFIRM="outputãƒ•ã‚©ãƒ«ãƒ€ã‚’å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ (Y/N): "
+    set /p CONFIRM="outputƒtƒHƒ‹ƒ_‚ðíœ‚µ‚Ü‚·‚©? (Y/N): "
     if /i "%CONFIRM%"=="Y" (
         rd /s /q output
         mkdir output
-        echo ç”Ÿæˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ã—ã¾ã—ãŸ
+        echo ¶¬ƒtƒ@ƒCƒ‹‚ðíœ‚µ‚Ü‚µ‚½
     )
 )
 goto END
 
 :FULL
 echo.
-echo [è­¦å‘Š] ComfyUIå…¨ä½“ãŒå‰Šé™¤ã•ã‚Œã¾ã™
-echo ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã‚‚å‰Šé™¤ã•ã‚Œã¾ã™ï¼ˆç´„5GBÃ—ãƒ¢ãƒ‡ãƒ«æ•°ï¼‰
+echo [Œx] ComfyUI‘S‘Ì‚ªíœ‚³‚ê‚Ü‚·
+echo ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹‚àíœ‚³‚ê‚Ü‚·(–ñ5GB~ƒ‚ƒfƒ‹”)
 echo.
-set /p CONFIRM="æœ¬å½“ã«å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ (YES ã¨å…¥åŠ›): "
+set /p CONFIRM="–{“–‚Éíœ‚µ‚Ü‚·‚©? (YES ‚Æ“ü—Í): "
 if "%CONFIRM%"=="YES" (
     cd /d "%~dp0"
     rd /s /q "%INSTALL_DIR%"
     del run_comfyui.bat 2>nul
-    echo ComfyUIã‚’å®Œå…¨ã«å‰Šé™¤ã—ã¾ã—ãŸ
+    echo ComfyUI‚ðŠ®‘S‚Éíœ‚µ‚Ü‚µ‚½
 ) else (
-    echo ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¾ã—ãŸ
+    echo ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ü‚µ‚½
 )
 goto END
 

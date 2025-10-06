@@ -1,27 +1,26 @@
 @echo off
-chcp 65001 >nul
 
-REM ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ç§»å‹•
+REM ƒXƒNƒŠƒvƒg‚ÌƒfƒBƒŒƒNƒgƒŠ‚ÉˆÚ“®
 cd /d "%~dp0"
 
 echo ================================================
-echo SVDãƒ¢ãƒ‡ãƒ«è‡ªå‹•ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+echo SVDƒ‚ƒfƒ‹©“®ƒ_ƒEƒ“ƒ[ƒhƒXƒNƒŠƒvƒg
 echo ================================================
 echo.
 
 set INSTALL_DIR=%~dp0..\ComfyUI
 set MODELS_DIR=%INSTALL_DIR%\models\checkpoints
 
-REM ComfyUIã®å­˜åœ¨ç¢ºèª
+REM ComfyUI‚Ì‘¶İŠm”F
 if not exist "%INSTALL_DIR%" (
-    echo [ã‚¨ãƒ©ãƒ¼] ComfyUIãŒã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã›ã‚“
-    echo å…ˆã«setup_comfyui_svd.batã‚’å®Ÿè¡Œã—ã¦ãã ã•ã„
+    echo [ƒGƒ‰[] ComfyUI‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ
+    echo æ‚Ésetup_comfyui_svd.bat‚ğÀs‚µ‚Ä‚­‚¾‚³‚¢
     pause
     exit /b 1
 )
 
 if not exist "%INSTALL_DIR%\venv\Scripts\activate.bat" (
-    echo [ã‚¨ãƒ©ãƒ¼] ä»®æƒ³ç’°å¢ƒãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“
+    echo [ƒGƒ‰[] ‰¼‘zŠÂ‹«‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ
     pause
     exit /b 1
 )
@@ -29,30 +28,30 @@ if not exist "%INSTALL_DIR%\venv\Scripts\activate.bat" (
 cd /d "%INSTALL_DIR%"
 set PYTHON_EXE=%INSTALL_DIR%\venv\Scripts\python.exe
 
-echo [1/3] Hugging Face CLIã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«...
+echo [1/3] Hugging Face CLI‚ÌƒCƒ“ƒXƒg[ƒ‹...
 "%PYTHON_EXE%" -m pip install -U huggingface-hub
 if %errorLevel% neq 0 (
     echo.
-    echo [ã‚¨ãƒ©ãƒ¼] Hugging Face CLIã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã«å¤±æ•—ã—ã¾ã—ãŸ
-    echo ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰: %errorLevel%
+    echo [ƒGƒ‰[] Hugging Face CLI‚ÌƒCƒ“ƒXƒg[ƒ‹‚É¸”s‚µ‚Ü‚µ‚½
+    echo ƒGƒ‰[ƒR[ƒh: %errorLevel%
     pause
     exit /b 1
 )
 echo.
 
-REM å¼•æ•°ãƒã‚§ãƒƒã‚¯: AUTOãŒæ¸¡ã•ã‚ŒãŸå ´åˆã¯è‡ªå‹•çš„ã«SVD-XT(1)ã‚’é¸æŠ
+REM ©“®ƒ`ƒFƒbƒN: AUTO‚ª“n‚³‚ê‚½ê‡‚Í©“®“I‚ÉSVD-XT(1)‚ğ‘I‘ğ
 if /i "%~1"=="AUTO" (
     set MODEL_CHOICE=1
-    echo [è‡ªå‹•é¸æŠ] SVD-XT 25ãƒ•ãƒ¬ãƒ¼ãƒ  æ¨å¥¨
+    echo [©“®‘I‘ğ] SVD-XT 25ƒtƒŒ[ƒ€ ”Å
     echo.
     goto PROCESS_CHOICE
 ) else (
-    echo ãƒ¢ãƒ‡ãƒ«ã‚’é¸æŠã—ã¦ãã ã•ã„:
-    echo 1. SVD-XT 25ãƒ•ãƒ¬ãƒ¼ãƒ  æ¨å¥¨ - VRAM 12-15GBå¿…è¦
-    echo 2. SVD 14ãƒ•ãƒ¬ãƒ¼ãƒ  - VRAM 10-12GBå¿…è¦
-    echo 3. ä¸¡æ–¹ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰
+    echo ƒ‚ƒfƒ‹‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢:
+    echo 1. SVD-XT 25ƒtƒŒ[ƒ€ ”Å - VRAM 12-15GB•K—v
+    echo 2. SVD 14ƒtƒŒ[ƒ€ - VRAM 10-12GB•K—v
+    echo 3. —¼•ûƒ_ƒEƒ“ƒ[ƒh
     echo.
-    set /p MODEL_CHOICE="é¸æŠ (1/2/3): "
+    set /p MODEL_CHOICE="‘I‘ğ (1/2/3): "
 )
 
 :PROCESS_CHOICE
@@ -60,43 +59,43 @@ if /i "%~1"=="AUTO" (
 if "%MODEL_CHOICE%"=="1" goto DOWNLOAD_XT
 if "%MODEL_CHOICE%"=="2" goto DOWNLOAD_NORMAL
 if "%MODEL_CHOICE%"=="3" goto DOWNLOAD_BOTH
-echo ç„¡åŠ¹ãªé¸æŠã§ã™
+echo –³Œø‚È‘I‘ğ‚Å‚·
 pause
 exit /b 1
 
 :DOWNLOAD_XT
-echo [2/3] SVD-XT 25ãƒ•ãƒ¬ãƒ¼ãƒ  ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­...
+echo [2/3] SVD-XT 25ƒtƒŒ[ƒ€ ”Åƒ_ƒEƒ“ƒ[ƒh’†...
 "%PYTHON_EXE%" -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='stabilityai/stable-video-diffusion-img2vid-xt', filename='svd_xt.safetensors', local_dir='%MODELS_DIR%', local_dir_use_symlinks=False)"
 if %errorLevel% neq 0 (
-    echo [ã‚¨ãƒ©ãƒ¼] ãƒ¢ãƒ‡ãƒ«ã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [ƒGƒ‰[] ƒ‚ƒfƒ‹‚Ìƒ_ƒEƒ“ƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½
     pause
     exit /b 1
 )
 goto COMPLETE
 
 :DOWNLOAD_NORMAL
-echo [2/3] SVD 14ãƒ•ãƒ¬ãƒ¼ãƒ  ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­...
+echo [2/3] SVD 14ƒtƒŒ[ƒ€ ”Åƒ_ƒEƒ“ƒ[ƒh’†...
 "%PYTHON_EXE%" -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='stabilityai/stable-video-diffusion-img2vid', filename='svd.safetensors', local_dir='%MODELS_DIR%', local_dir_use_symlinks=False)"
 if %errorLevel% neq 0 (
-    echo [ã‚¨ãƒ©ãƒ¼] ãƒ¢ãƒ‡ãƒ«ã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [ƒGƒ‰[] ƒ‚ƒfƒ‹‚Ìƒ_ƒEƒ“ƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½
     pause
     exit /b 1
 )
 goto COMPLETE
 
 :DOWNLOAD_BOTH
-echo [2/3] ä¸¡æ–¹ã®ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­...
-echo SVD-XTã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­...
+echo [2/3] —¼•û‚Ìƒ‚ƒfƒ‹‚ğƒ_ƒEƒ“ƒ[ƒh’†...
+echo SVD-XT‚ğƒ_ƒEƒ“ƒ[ƒh’†...
 "%PYTHON_EXE%" -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='stabilityai/stable-video-diffusion-img2vid-xt', filename='svd_xt.safetensors', local_dir='%MODELS_DIR%', local_dir_use_symlinks=False)"
 if %errorLevel% neq 0 (
-    echo [ã‚¨ãƒ©ãƒ¼] SVD-XTã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [ƒGƒ‰[] SVD-XT‚Ìƒ_ƒEƒ“ƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½
     pause
     exit /b 1
 )
-echo SVDã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­...
+echo SVD‚ğƒ_ƒEƒ“ƒ[ƒh’†...
 "%PYTHON_EXE%" -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='stabilityai/stable-video-diffusion-img2vid', filename='svd.safetensors', local_dir='%MODELS_DIR%', local_dir_use_symlinks=False)"
 if %errorLevel% neq 0 (
-    echo [ã‚¨ãƒ©ãƒ¼] SVDã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ
+    echo [ƒGƒ‰[] SVD‚Ìƒ_ƒEƒ“ƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½
     pause
     exit /b 1
 )
@@ -104,11 +103,11 @@ goto COMPLETE
 
 :COMPLETE
 echo.
-echo [3/3] ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å®Œäº†ï¼
+echo [3/3] ƒ_ƒEƒ“ƒ[ƒhŠ®—¹
 echo.
-echo ãƒ¢ãƒ‡ãƒ«ã®é…ç½®å ´æ‰€: %MODELS_DIR%
+echo ƒ‚ƒfƒ‹‚Ì”z’uêŠ: %MODELS_DIR%
 echo.
 dir /b "%MODELS_DIR%\*.safetensors"
 echo.
-echo ComfyUIã‚’èµ·å‹•ã—ã¦ãã ã•ã„: daily-use\run_comfyui_advanced.bat
+echo ComfyUI‚ğ‹N“®‚µ‚Ä‚­‚¾‚³‚¢: daily-use\run_comfyui_advanced.bat
 pause
