@@ -60,3 +60,22 @@
 
 - `install_all.bat`を使用すると、自動的にSVD-XT（25フレーム）がダウンロードされます
 - VRAMが少ない場合は、個別に`download_svd_model.bat`を実行してSVD（14フレーム）を選択してください
+
+## 📜 ライセンスと免責事項
+
+### このプロジェクト
+- **ライセンス**: MIT License
+- 本スクリプトは自由に使用・改変・配布できます
+
+### 依存ソフトウェア
+本スクリプトは以下のソフトウェアをインストールします。各ライセンスを確認の上ご利用ください：
+
+- **ComfyUI**: [GPLv3](https://github.com/comfyanonymous/ComfyUI/blob/master/LICENSE)
+- **PyTorch**: [BSD License](https://github.com/pytorch/pytorch/blob/main/LICENSE)
+- **Stable Video Diffusion カスタムノード**: 各ノードのライセンスを確認してください
+- **SVDモデル**: [Stability AI License](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt/blob/main/LICENSE) - **商用利用には制限があります**
+
+### 免責事項
+- インストールされるソフトウェアの使用は各自の責任で行ってください
+- SVDモデルの商用利用については、Stability AIのライセンス条項を必ず確認してください
+- 本スクリプトの使用によって生じた損害について、作者は一切の責任を負いません
